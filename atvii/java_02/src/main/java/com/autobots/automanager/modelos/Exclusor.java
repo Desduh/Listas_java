@@ -1,7 +1,5 @@
 package com.autobots.automanager.modelos;
 
-import java.util.List;
-
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
 import com.autobots.automanager.entidades.Endereco;
@@ -15,9 +13,9 @@ public class Exclusor {
 			cliente.getDocumentos().remove(index);
 		}
 	}
-	public void excluirTelefones(Cliente cliente, List<Telefone> telefones) {
+	public void excluirTelefones(Cliente cliente, Telefone telefone) {
 		TelefoneExclusor exclusor = new TelefoneExclusor();
-		int index = exclusor.excluir(cliente.getTelefones(), telefones);
+		int index = exclusor.excluir(cliente.getTelefones(), telefone);
 		if(index != -1) {
 			cliente.getTelefones().remove(index);
 		}
@@ -26,9 +24,5 @@ public class Exclusor {
 		if(endereco != null) {
 			cliente.setEndereco(null);	
 		}
-	}
-	
-	public void excluir(Cliente cliente, Cliente exclusao) {
-		excluirTelefones(cliente, exclusao.getTelefones());
 	}
 }

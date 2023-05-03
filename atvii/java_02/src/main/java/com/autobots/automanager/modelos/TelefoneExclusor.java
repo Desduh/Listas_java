@@ -10,14 +10,12 @@ public class TelefoneExclusor {
 		return index;
 	}
 
-	public int excluir(List<Telefone> telefones, List<Telefone> atualizacoes) {
-		for (Telefone atualizacao : atualizacoes) {
-			for (Telefone telefone : telefones) {
-				if (atualizacao.getId() != null) {
-					if (atualizacao.getId() == telefone.getId()) {
-						int index = excluir(telefone, telefones);
-						return index;
-					}
+	public int excluir(List<Telefone> telefones, Telefone atualizacao) {
+		for (Telefone telefone : telefones) {
+			if (atualizacao.getId() != null) {
+				if (atualizacao.getId() == telefone.getId()) {
+					int index = excluir(telefone, telefones);
+					return index;
 				}
 			}
 		}

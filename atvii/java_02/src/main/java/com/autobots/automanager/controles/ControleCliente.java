@@ -91,16 +91,4 @@ public class ControleCliente {
 		}
 		return new ResponseEntity<>(status);
 	}
-	
-	@DeleteMapping("/excluir/dado")
-	public ResponseEntity<?> excluirDocument(@RequestBody Cliente exclusao) {
-		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Cliente cliente = repositorioCliente.getById(exclusao.getId());
-		if (cliente != null) {
-			Exclusor exclusor = new Exclusor();
-			exclusor.excluir(cliente, exclusao);
-			repositorioCliente.save(cliente);
-		}
-		return new ResponseEntity<>(status);
-	}
 }
