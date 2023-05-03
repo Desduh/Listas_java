@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
+import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.entidades.Telefone;
 
 public class Exclusor {	
@@ -21,9 +22,15 @@ public class Exclusor {
 			cliente.getTelefones().remove(index);
 		}
 	}
+	public void excluirEnderecos(Cliente cliente, Endereco endereco) {
+		if(endereco != null) {
+			cliente.setEndereco(null);	
+		}
+	}
 	
 	public void excluir(Cliente cliente, Cliente exclusao) {
 		excluirDocumentos(cliente, exclusao.getDocumentos());
 		excluirTelefones(cliente, exclusao.getTelefones());
+		excluirEnderecos(cliente, exclusao.getEndereco());
 	}
 }

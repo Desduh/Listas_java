@@ -10,75 +10,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.modelo.ClienteAtualizador;
 import com.autobots.automanager.modelo.ClienteSelecionador;
-import com.autobots.automanager.modelo.DocumentoAdicionador;
 import com.autobots.automanager.modelo.Exclusor;
-import com.autobots.automanager.modelo.TelefoneAdicionador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 
 @RestController
-public class Controle {
+public class ControleCliente {
 	@Autowired
-	private ClienteRepositorio repositorio;
+	private ClienteRepositorio repositorioCliente;
 	@Autowired
 	private ClienteSelecionador selecionador;
 
 	@GetMapping("/cliente/{id}")
 	public Cliente obterCliente(@PathVariable long id) {
-		List<Cliente> clientes = repositorio.findAll();
+		List<Cliente> clientes = repositorioCliente.findAll();
 		return selecionador.selecionar(clientes, id);
 	}
 
-	@GetMapping("/visualizar")
+	@GetMapping("/visualizar/clientes")
 	public List<Cliente> obterClientes() {
-		List<Cliente> clientes = repositorio.findAll();
+		List<Cliente> clientes = repositorioCliente.findAll();
 		return clientes;
 	}
 
 	@PostMapping("/cadastro")
 	public void cadastrarCliente(@RequestBody Cliente cliente) {
-		repositorio.save(cliente);
-	}
-	
-	@PutMapping("/adicao/documento")
-	public void adicionarDocumento(@RequestBody Cliente adicao) {
-		Cliente cliente = repositorio.getById(adicao.getId());
-		DocumentoAdicionador adicionador = new DocumentoAdicionador();
-		adicionador.adicionar(cliente, adicao);
-		repositorio.save(cliente);
-	}
-	
-	@PutMapping("/adicao/telefone")
-	public void adicionarTelefone(@RequestBody Cliente adicao) {
-		Cliente cliente = repositorio.getById(adicao.getId());
-		TelefoneAdicionador adicionador = new TelefoneAdicionador();
-		adicionador.adicionar(cliente, adicao);
-		repositorio.save(cliente);
+		repositorioCliente.save(cliente);
 	}
 
 	@PutMapping("/atualizar")
 	public void atualizarCliente(@RequestBody Cliente atualizacao) {
-		Cliente cliente = repositorio.getById(atualizacao.getId());
+		Cliente cliente = repositorioCliente.getById(atualizacao.getId());
 		ClienteAtualizador atualizador = new ClienteAtualizador();
 		atualizador.atualizar(cliente, atualizacao);
-		repositorio.save(cliente);
+		repositorioCliente.save(cliente);
 	}
 
-
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/cliente/excluir")
 	public void excluirCliente(@RequestBody Cliente exclusao) {
-		Cliente cliente = repositorio.getById(exclusao.getId());
-		repositorio.delete(cliente);
+		Cliente cliente = repositorioCliente.getById(exclusao.getId());
+		repositorioCliente.delete(cliente);
 	}
 	
 	@DeleteMapping("/excluir/dado")
 	public void excluirDocumento(@RequestBody Cliente exclusao) {
-		Cliente cliente = repositorio.getById(exclusao.getId());
+		Cliente cliente = repositorioCliente.getById(exclusao.getId());
 		Exclusor exclusor = new Exclusor();
 		exclusor.excluir(cliente, exclusao);
-		repositorio.save(cliente);
+		repositorioCliente.save(cliente);
 	}
 }
-
