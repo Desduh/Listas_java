@@ -9,14 +9,12 @@ public class DocumentoExclusor {
 		return index;
 	}
 
-	public int excluir(List<Documento> documentos, List<Documento> atualizacoes) {
-		for (Documento atualizacao : atualizacoes) {
-			for (Documento documento : documentos) {
-				if (atualizacao.getId() != null) {
-					if (atualizacao.getId() == documento.getId()) {
-						int index = excluir(documento, documentos);
-						return index;
-					}
+	public int excluir(List<Documento> documentos, Documento atualizacao) {
+		for (Documento documento : documentos) {
+			if (atualizacao.getId() != null) {
+				if (atualizacao.getId() == documento.getId()) {
+					int index = excluir(documento, documentos);
+					return index;
 				}
 			}
 		}
