@@ -18,7 +18,10 @@ import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.modelos.AdicionadorLinkDocumentos;
 import com.autobots.automanager.modelos.AdicionarLinkEndereco;
 import com.autobots.automanager.modelos.DocumentoAdicionador;
+import com.autobots.automanager.modelos.DocumentoAtualizador;
+import com.autobots.automanager.modelos.EnderecoAtualizador;
 import com.autobots.automanager.modelos.Exclusor;
+import com.autobots.automanager.modelos.Selecionador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.DocumentosRepositorio;
 
@@ -26,8 +29,6 @@ import com.autobots.automanager.repositorios.DocumentosRepositorio;
 public class ControleDocumento {
 	@Autowired
 	private DocumentosRepositorio repositorioDocumento;
-	@Autowired
-	private ClienteRepositorio repositorioCliente;
 	@Autowired
 	private AdicionadorLinkDocumentos adicionadorLink;
 	
@@ -44,27 +45,42 @@ public class ControleDocumento {
 		}
 	}
 	
-	@PutMapping("/adicao/documento")
-	public ResponseEntity<?> adicionarDocumento(@RequestBody Cliente adicao) {
+	@GetMapping("/documento/{id}")
+	public ResponseEntity<Documento> obterDocumento(@PathVariable long id) {
+		List<Documento> documentos = repositorioDocumento.findAll();
+		Documento documento = Selecionador.documentoSelecionador(documentos, id);
+		if (documento == null) {
+			ResponseEntity<Documento> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+			return resposta;
+		} else {
+			adicionadorLink.adicionarLink(documento);
+			ResponseEntity<Documento> resposta = new ResponseEntity<Documento>(documento, HttpStatus.FOUND) ;
+			return resposta;
+		}
+	}
+	
+	@PutMapping("/atualizar/documento")
+	public ResponseEntity<?> atualizarDocumento(@RequestBody Documento atualizacao) {
 		HttpStatus status = HttpStatus.CONFLICT;
-		if (adicao.getId() == null) {
-			Cliente cliente = repositorioCliente.getById(adicao.getId());
-			DocumentoAdicionador adicionador = new DocumentoAdicionador();
-			adicionador.adicionar(cliente, adicao);
-			repositorioCliente.save(cliente);
+		Documento documento = repositorioDocumento.getById(atualizacao.getId());
+		if (documento != null) {
+			DocumentoAtualizador atualizador = new DocumentoAtualizador();
+			atualizador.atualizar(documento, atualizacao);
+			repositorioDocumento.save(documento);
+			status = HttpStatus.OK;
+		} else {
+			status = HttpStatus.BAD_REQUEST;
 		}
 		return new ResponseEntity<>(status);
 	}
 	
-	@DeleteMapping("/excluir/documento/{id_doc}/cliente/{id_cli}")
-	public ResponseEntity<?> excluirDocumento(@PathVariable long id_doc,@PathVariable long id_cli) {
+	@DeleteMapping("/excluir/documento/{id}")
+	public ResponseEntity<?> excluirDocumento(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Cliente cliente = repositorioCliente.getById(id_cli);
-		Documento documento = repositorioDocumento.getById(id_doc);
-		if (cliente != null) {
-			Exclusor exclusor = new Exclusor();
-			exclusor.excluirDocumentos(cliente, documento);
-			repositorioCliente.save(cliente);
+		Documento documento = repositorioDocumento.getById(id);
+		if (documento != null) {
+			repositorioDocumento.delete(documento);
+			status = HttpStatus.OK;
 		}
 		return new ResponseEntity<>(status);
 	}

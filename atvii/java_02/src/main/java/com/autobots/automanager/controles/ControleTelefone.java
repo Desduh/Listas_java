@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
 import com.autobots.automanager.entidades.Telefone;
+import com.autobots.automanager.modelos.AdicionadorLinkTelefone;
+import com.autobots.automanager.modelos.DocumentoAtualizador;
 import com.autobots.automanager.modelos.Exclusor;
+import com.autobots.automanager.modelos.Selecionador;
 import com.autobots.automanager.modelos.TelefoneAdicionador;
+import com.autobots.automanager.modelos.TelefoneAtualizador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.TelefoneRepositorio;
 
@@ -25,35 +29,57 @@ public class ControleTelefone {
 	@Autowired
 	private TelefoneRepositorio repositorioTelefone;	
 	@Autowired
-	private ClienteRepositorio repositorioCliente;
+	private AdicionadorLinkTelefone adicionadorLink;
 	
 	@GetMapping("/visualizar/telefones")
-	public List<Telefone> obterTelefones() {
-		List<Telefone> telefones = repositorioTelefone.findAll();
-		return telefones;
+	public ResponseEntity<List<Telefone>> obterTelefones() {
+		List<Telefone> telefones = repositorioTelefone.findAll();		
+		if (telefones.isEmpty()) {
+			ResponseEntity<List<Telefone>> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return resposta;
+		} else {
+			adicionadorLink.adicionarLink(telefones);
+			ResponseEntity<List<Telefone>> resposta = new ResponseEntity<>(telefones, HttpStatus.FOUND);
+			return resposta;
+		}
 	}
 	
-	@PutMapping("/adicao/telefone")
-	public ResponseEntity<?> adicionarTelefone(@RequestBody Cliente adicao) {
+	@GetMapping("/telefone/{id}")
+	public ResponseEntity<Telefone> obterTelefone(@PathVariable long id) {
+		List<Telefone> telefones = repositorioTelefone.findAll();
+		Telefone telefone = Selecionador.telefoneSelecionador(telefones, id);
+		if (telefone == null) {
+			ResponseEntity<Telefone> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+			return resposta;
+		} else {
+			adicionadorLink.adicionarLink(telefone);
+			ResponseEntity<Telefone> resposta = new ResponseEntity<Telefone>(telefone, HttpStatus.FOUND) ;
+			return resposta;
+		}
+	}
+	
+	@PutMapping("/atualizar/telefone")
+	public ResponseEntity<?> atualizarTelefone(@RequestBody Telefone atualizacao) {
 		HttpStatus status = HttpStatus.CONFLICT;
-		if (adicao.getId() == null) {
-			Cliente cliente = repositorioCliente.getById(adicao.getId());
-			TelefoneAdicionador adicionador = new TelefoneAdicionador();
-			adicionador.adicionar(cliente, adicao);
-			repositorioCliente.save(cliente);
+		Telefone telefone = repositorioTelefone.getById(atualizacao.getId());
+		if (telefone != null) {
+			TelefoneAtualizador atualizador = new TelefoneAtualizador();
+			atualizador.atualizar(telefone, atualizacao);
+			repositorioTelefone.save(telefone);
+			status = HttpStatus.OK;
+		} else {
+			status = HttpStatus.BAD_REQUEST;
 		}
 		return new ResponseEntity<>(status);
 	}
 	
-	@DeleteMapping("/excluir/telefone/{id_tel}/cliente/{id_cli}")
-	public ResponseEntity<?> excluirDocumento(@PathVariable long id_tel,@PathVariable long id_cli) {
+	@DeleteMapping("/excluir/telefone/{id}")
+	public ResponseEntity<?> excluirTelefone(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Cliente cliente = repositorioCliente.getById(id_cli);
-		Telefone telefone = repositorioTelefone.getById(id_tel);
-		if (cliente != null) {
-			Exclusor exclusor = new Exclusor();
-			exclusor.excluirTelefones(cliente, telefone);
-			repositorioCliente.save(cliente);
+		Telefone telefone = repositorioTelefone.getById(id);
+		if (telefone != null) {
+			repositorioTelefone.delete(telefone);
+			status = HttpStatus.OK;
 		}
 		return new ResponseEntity<>(status);
 	}

@@ -8,36 +8,48 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
 
 import com.autobots.automanager.controles.ControleDocumento;
+import com.autobots.automanager.controles.ControleEndereco;
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
+import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 
 @Component
 public class AdicionadorLinkDocumentos implements AdicionadorLink<Documento> {
-	@Autowired
-	private ClienteRepositorio repositorioCliente;
+
 	@Override
 	public void adicionarLink(List<Documento> lista) {
-		List<Cliente> clientes = repositorioCliente.findAll();
 		for (Documento documento : lista) {
-			for (Cliente cliente : clientes) {
-				for (Documento cli_doc : cliente.getDocumentos()) {
-					if(cli_doc.getId() == documento.getId()) {
-						Link linkProprio = WebMvcLinkBuilder
-								.linkTo(WebMvcLinkBuilder
-										.methodOn(ControleDocumento.class)
-										.excluirDocumento(documento.getId(),cliente.getId()))
-								.withRel("Excluir documento");
-						documento.add(linkProprio);
-					}
-				}
-			}
+			long id = documento.getId();
+			Link linkProprioDocumento = WebMvcLinkBuilder
+					.linkTo(WebMvcLinkBuilder
+							.methodOn(ControleDocumento.class)
+							.obterDocumento(id))
+					.withSelfRel();
+			documento.add(linkProprioDocumento);
 		}
 	}
 
 	@Override
 	public void adicionarLink(Documento objeto) {
-		// TODO Auto-generated method stub
-		
+		long id = objeto.getId();
+		Link linkProprioDocumentos = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleDocumento.class)
+						.obterDocumentos())
+				.withRel("documentos");
+		Link linkProprioAtualizar = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleDocumento.class)
+						.atualizarDocumento(objeto))
+				.withRel("atualizar_documento");
+		Link linkProprioExcluir = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleDocumento.class)
+						.excluirDocumento(id))
+				.withRel("excluir_documento");
+		objeto.add(linkProprioDocumentos);
+		objeto.add(linkProprioAtualizar);
+		objeto.add(linkProprioExcluir);
 	}
 }

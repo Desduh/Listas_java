@@ -16,30 +16,40 @@ import com.autobots.automanager.repositorios.ClienteRepositorio;
 
 @Component
 public class AdicionadorLinkTelefone implements AdicionadorLink<Telefone> {
-	@Autowired
-	private ClienteRepositorio repositorioCliente;
+
 	@Override
 	public void adicionarLink(List<Telefone> lista) {
-		List<Cliente> clientes = repositorioCliente.findAll();
 		for (Telefone telefone : lista) {
-			for (Cliente cliente : clientes) {
-				for (Telefone cli_tel : cliente.getTelefones()) {
-					if(cli_tel.getId() == telefone.getId()) {
-						Link linkProprio = WebMvcLinkBuilder
-								.linkTo(WebMvcLinkBuilder
-										.methodOn(ControleTelefone.class)
-										.excluirTelefone(telefone.getId(),cliente.getId()))
-								.withRel("Excluir telefone");
-						telefone.add(linkProprio);
-					}
-				}
-			}
+			long id = telefone.getId();
+			Link linkProprioTelefone = WebMvcLinkBuilder
+					.linkTo(WebMvcLinkBuilder
+							.methodOn(ControleTelefone.class)
+							.obterTelefone(id))
+					.withSelfRel();
+			telefone.add(linkProprioTelefone);
 		}
 	}
 
 	@Override
 	public void adicionarLink(Telefone objeto) {
-		// TODO Auto-generated method stub
-		
+		long id = objeto.getId();
+		Link linkProprioTelefones = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleTelefone.class)
+						.obterTelefones())
+				.withRel("telefones");
+		Link linkProprioAtualizar = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleTelefone.class)
+						.atualizarTelefone(objeto))
+				.withRel("atualizar_telefone");
+		Link linkProprioExcluir = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(ControleTelefone.class)
+						.excluirTelefone(id))
+				.withRel("excluir_telefone");
+		objeto.add(linkProprioTelefones);
+		objeto.add(linkProprioAtualizar);
+		objeto.add(linkProprioExcluir);
 	}
 }
