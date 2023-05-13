@@ -11,14 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Endereco;
+import com.autobots.automanager.modelos.Exclusor;
 import com.autobots.automanager.modelos.EnderecoAtualizador;
+import com.autobots.automanager.modelos.EnderecoExclusor;
 import com.autobots.automanager.modelos.Selecionador;
 import com.autobots.automanager.modelos.AdicionarLinkEndereco;
+import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.EnderecoRepositorio;
 
 @RestController
 public class ControleEndereco {
+	@Autowired
+	private ClienteRepositorio repositorioCliente;
 	@Autowired
 	private EnderecoRepositorio repositorioEndereco;
 	@Autowired
@@ -69,12 +76,10 @@ public class ControleEndereco {
 	@DeleteMapping("/excluir/endereco/{id}")
 	public ResponseEntity<?> excluirEndereco(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		List<Endereco> enderecos = repositorioEndereco.findAll();
-		Endereco endereco = Selecionador.enderecoSelecionador(enderecos, id);
-		if (endereco != null) {
-			repositorioEndereco.delete(endereco);
-			status = HttpStatus.OK;
-		}
+		List<Cliente> clientes = repositorioCliente.findAll();
+		EnderecoExclusor exclusor = new EnderecoExclusor();
+		List<Cliente> removido = exclusor.excluirEndereco(id, clientes);
+		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
 	}
 }
