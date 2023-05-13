@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
+import com.autobots.automanager.modelos.DocumentoAdicionador;
 import com.autobots.automanager.modelos.AdicionadorLinkDocumentos;
 import com.autobots.automanager.modelos.DocumentoAtualizador;
 import com.autobots.automanager.modelos.DocumentoExclusor;
@@ -81,5 +82,13 @@ public class ControleDocumento {
 		List<Cliente> removido = excluir.excluir(clientes, documento);
 		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
+	}
+	
+	@PutMapping("/adicao/documento")
+	public void adicionarDocumento(@RequestBody Cliente adicao) {
+		Cliente cliente = repositorioCliente.getById(adicao.getId());
+		DocumentoAdicionador adicionador = new DocumentoAdicionador();
+		adicionador.adicionar(cliente, adicao);
+		repositorioCliente.save(cliente);
 	}
 }

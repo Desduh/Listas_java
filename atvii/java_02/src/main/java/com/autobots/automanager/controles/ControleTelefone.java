@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Telefone;
+import com.autobots.automanager.modelos.TelefoneAdicionador;
 import com.autobots.automanager.modelos.AdicionadorLinkTelefone;
 import com.autobots.automanager.modelos.Selecionador;
 import com.autobots.automanager.modelos.TelefoneAtualizador;
@@ -81,5 +82,13 @@ public class ControleTelefone {
 		List<Cliente> removido = excluir.excluir(clientes, telefone);
 		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
+	}
+	
+	@PutMapping("/adicao/telefone")
+	public void adicionarTelefone(@RequestBody Cliente adicao) {
+		Cliente cliente = repositorioCliente.getById(adicao.getId());
+		TelefoneAdicionador adicionador = new TelefoneAdicionador();
+		adicionador.adicionar(cliente, adicao);
+		repositorioCliente.save(cliente);
 	}
 }

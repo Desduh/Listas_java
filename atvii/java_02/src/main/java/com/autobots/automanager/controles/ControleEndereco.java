@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Endereco;
+import com.autobots.automanager.modelos.EnderecoAdicionador;
 import com.autobots.automanager.modelos.EnderecoAtualizador;
 import com.autobots.automanager.modelos.EnderecoExclusor;
 import com.autobots.automanager.modelos.Selecionador;
@@ -80,5 +81,13 @@ public class ControleEndereco {
 		List<Cliente> removido = exclusor.excluirEndereco(id, clientes);
 		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
+	}
+	
+	@PutMapping("/adicao/endereco")
+	public void adicionarDocumento(@RequestBody Cliente adicao) {
+		Cliente cliente = repositorioCliente.getById(adicao.getId());
+		EnderecoAdicionador adicionador = new EnderecoAdicionador();
+		adicionador.adicionar(cliente, adicao);
+		repositorioCliente.save(cliente);
 	}
 }
