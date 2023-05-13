@@ -17,7 +17,6 @@ import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.modelos.AdicionadorLinkCliente;
 import com.autobots.automanager.modelos.ClienteAtualizador;
 import com.autobots.automanager.modelos.ClienteSelecionador;
-import com.autobots.automanager.modelos.Exclusor;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 
 @RestController

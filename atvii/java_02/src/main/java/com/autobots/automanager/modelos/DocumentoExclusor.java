@@ -1,25 +1,28 @@
 package com.autobots.automanager.modelos;
 
 import java.util.List;
+
+import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
 
 public class DocumentoExclusor {
-	public int excluir(Documento documento, List<Documento> documentos) {
-		int index = documentos.indexOf(documento);
-		return index;
-	}
-
-	public int excluir(List<Documento> documentos, List<Documento> atualizacoes) {
-		for (Documento atualizacao : atualizacoes) {
-			for (Documento documento : documentos) {
-				if (atualizacao.getId() != null) {
-					if (atualizacao.getId() == documento.getId()) {
-						int index = excluir(documento, documentos);
-						return index;
+	public List<Cliente> excluir(List<Cliente> clientes, Documento documento) {
+		Cliente clienteRe = null;
+		int index = -1;
+		for(Cliente cliente : clientes) {
+			for(Documento documentoCli : cliente.getDocumentos()) {
+				if(documentoCli == documento) {
+					index = cliente.getDocumentos().indexOf(documento);
+					if(index == -1) {
+						index = index*-1;
 					}
+					clienteRe = cliente;
 				}
 			}
 		}
-		return -1;
+		if(index != -1) {
+			clienteRe.getDocumentos().remove(index-1);
+		}
+		return clientes;
 	}
 }

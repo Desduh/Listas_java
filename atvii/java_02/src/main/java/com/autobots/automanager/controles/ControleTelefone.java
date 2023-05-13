@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
-import com.autobots.automanager.entidades.Documento;
 import com.autobots.automanager.entidades.Telefone;
 import com.autobots.automanager.modelos.AdicionadorLinkTelefone;
-import com.autobots.automanager.modelos.DocumentoAtualizador;
-import com.autobots.automanager.modelos.Exclusor;
 import com.autobots.automanager.modelos.Selecionador;
-import com.autobots.automanager.modelos.TelefoneAdicionador;
 import com.autobots.automanager.modelos.TelefoneAtualizador;
+import com.autobots.automanager.modelos.TelefoneExclusor;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.TelefoneRepositorio;
 
 @RestController
 public class ControleTelefone {
+	@Autowired
+	private ClienteRepositorio repositorioCliente;
 	@Autowired
 	private TelefoneRepositorio repositorioTelefone;	
 	@Autowired
@@ -76,11 +75,11 @@ public class ControleTelefone {
 	@DeleteMapping("/excluir/telefone/{id}")
 	public ResponseEntity<?> excluirTelefone(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Telefone telefone = repositorioTelefone.getById(id);
-		if (telefone != null) {
-			repositorioTelefone.delete(telefone);
-			status = HttpStatus.OK;
-		}
+		List<Cliente> clientes = repositorioCliente.findAll();
+		Telefone telefone = repositorioTelefone.getById(id);		
+		TelefoneExclusor excluir = new TelefoneExclusor();
+		List<Cliente> removido = excluir.excluir(clientes, telefone);
+		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
 	}
 }

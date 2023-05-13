@@ -14,19 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
-import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.modelos.AdicionadorLinkDocumentos;
-import com.autobots.automanager.modelos.AdicionarLinkEndereco;
-import com.autobots.automanager.modelos.DocumentoAdicionador;
 import com.autobots.automanager.modelos.DocumentoAtualizador;
-import com.autobots.automanager.modelos.EnderecoAtualizador;
-import com.autobots.automanager.modelos.Exclusor;
+import com.autobots.automanager.modelos.DocumentoExclusor;
 import com.autobots.automanager.modelos.Selecionador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.DocumentosRepositorio;
 
 @RestController
 public class ControleDocumento {
+	@Autowired
+	private ClienteRepositorio repositorioCliente;
 	@Autowired
 	private DocumentosRepositorio repositorioDocumento;
 	@Autowired
@@ -77,11 +75,11 @@ public class ControleDocumento {
 	@DeleteMapping("/excluir/documento/{id}")
 	public ResponseEntity<?> excluirDocumento(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Documento documento = repositorioDocumento.getById(id);
-		if (documento != null) {
-			repositorioDocumento.delete(documento);
-			status = HttpStatus.OK;
-		}
+		List<Cliente> clientes = repositorioCliente.findAll();
+		Documento documento = repositorioDocumento.getById(id);		
+		DocumentoExclusor excluir = new DocumentoExclusor();
+		List<Cliente> removido = excluir.excluir(clientes, documento);
+		repositorioCliente.saveAll(removido);
 		return new ResponseEntity<>(status);
 	}
 }
