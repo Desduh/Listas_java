@@ -33,7 +33,7 @@ public class EmailControle {
 	@Autowired
 	private AdicionadorLinkEmail adicionadorLink;
 
-	@GetMapping("/veiculo/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Email> obterEmail(@PathVariable long id) {
 		List<Email> emails = repositorio.findAll();
 		Email email = Selecionador.emailSelecionador(emails, id);
@@ -47,7 +47,7 @@ public class EmailControle {
 		}
 	}
 
-	@GetMapping("/emails")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Email>> obterEmails() {
 		List<Email> emails = repositorio.findAll();
 		if (emails.isEmpty()) {

@@ -33,7 +33,7 @@ public class MercadoriaControle {
 	@Autowired
 	private AdicionadorLinkMercadoria adicionadorLink;
 
-	@GetMapping("/mercadoria/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Mercadoria> obterMercadoria(@PathVariable long id) {
 		List<Mercadoria> mercadorias = repositorio.findAll();
 		Mercadoria mercadoria = Selecionador.mercadoriaSelecionador(mercadorias, id);
@@ -47,7 +47,7 @@ public class MercadoriaControle {
 		}
 	}
 
-	@GetMapping("/mercadorias")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Mercadoria>> obterMercadorias() {
 		List<Mercadoria> Mercadorias = repositorio.findAll();
 		if (Mercadorias.isEmpty()) {
@@ -89,7 +89,7 @@ public class MercadoriaControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> excluirMercadoria(@RequestBody Mercadoria exclusao, @PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Mercadoria mercadoria = repositorio.getById(exclusao.getId());

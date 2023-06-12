@@ -33,7 +33,7 @@ public class VeiculoControle {
 	@Autowired
 	private AdicionadorLinkVeiculo adicionadorLink;
 
-	@GetMapping("/veiculo/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Veiculo> obterVeiculo(@PathVariable long id) {
 		List<Veiculo> veiculos = repositorio.findAll();
 		Veiculo veiculo = Selecionador.veiculoSelecionador(veiculos, id);
@@ -47,7 +47,7 @@ public class VeiculoControle {
 		}
 	}
 
-	@GetMapping("/veiculos")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Veiculo>> obterVeiculos() {
 		List<Veiculo> veiculos = repositorio.findAll();
 		if (veiculos.isEmpty()) {

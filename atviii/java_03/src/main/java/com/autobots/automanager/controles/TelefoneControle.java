@@ -33,7 +33,7 @@ public class TelefoneControle {
 	@Autowired
 	private AdicionadorLinkTelefone AdicionadorLink;
 
-	@GetMapping("/telefone/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Telefone> obterTelefone(@PathVariable long id) {
 		List<Telefone> telefones = repositorio.findAll();
 		Telefone telefone = Selecionador.telefoneSelecionador(telefones, id);
@@ -47,7 +47,7 @@ public class TelefoneControle {
 		}
 	}
 
-	@GetMapping("/telefones")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Telefone>> obterTelefones() {
 		List<Telefone> telefones = repositorio.findAll();
 		if (telefones.isEmpty()) {

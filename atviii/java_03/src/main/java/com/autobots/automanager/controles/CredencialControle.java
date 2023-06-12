@@ -89,7 +89,7 @@ public class CredencialControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> excluirCredencial(@RequestBody Credencial exclusao, @PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Credencial credencial = repositorio.getById(exclusao.getId());

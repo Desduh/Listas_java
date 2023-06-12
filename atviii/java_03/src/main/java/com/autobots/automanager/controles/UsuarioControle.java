@@ -33,7 +33,7 @@ public class UsuarioControle {
 	@Autowired
 	private AdicionadorLinkUsuario adicionadorLink;
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> obterUsuario(@PathVariable long id) {
 		List<Usuario> usuarios = repositorio.findAll();
 		Usuario usuario = Selecionador.usuarioSelecionador(usuarios, id);
@@ -47,7 +47,7 @@ public class UsuarioControle {
 		}
 	}
 
-	@GetMapping("/usuarios")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Usuario>> obterUsuarios() {
 		List<Usuario> usuarios = repositorio.findAll();
 		if (usuarios.isEmpty()) {
@@ -89,7 +89,7 @@ public class UsuarioControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> excluirUsuario(@RequestBody Usuario exclusao, @PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Usuario usuario = repositorio.getById(exclusao.getId());

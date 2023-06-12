@@ -28,7 +28,7 @@ public class EmpresaControle {
 	@Autowired
 	private AdicionadorLinkEmpresa adicionadorLink;
 
-	@GetMapping("/empresa/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Empresa> obterEmpresa(@PathVariable long id) {
 		List<Empresa> empresas = repositorio.findAll();
 		Empresa empresa = Selecionador.empresaSelecionador(empresas, id);
@@ -42,7 +42,7 @@ public class EmpresaControle {
 		}
 	}
 
-	@GetMapping("/empresas")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Empresa>> obterEmpresas() {
 		List<Empresa> empresas = repositorio.findAll();
 		if (empresas.isEmpty()) {
@@ -80,10 +80,10 @@ public class EmpresaControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
-	public ResponseEntity<?> excluirEmpresa(@RequestBody Empresa exclusao) {
+	@DeleteMapping("/excluir/{id}")
+	public ResponseEntity<?> excluirEmpresa(@PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Empresa empresa = repositorio.getById(exclusao.getId());
+		Empresa empresa = repositorio.getById(id);
 		if (empresa != null) {
 			repositorio.delete(empresa);
 			status = HttpStatus.OK;

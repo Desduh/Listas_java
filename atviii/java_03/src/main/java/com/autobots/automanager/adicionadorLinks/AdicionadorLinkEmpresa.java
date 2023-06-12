@@ -24,7 +24,7 @@ public class AdicionadorLinkEmpresa implements AdicionadorLink<Empresa>{
 			Link linkProprioExcluir = WebMvcLinkBuilder
 					.linkTo(WebMvcLinkBuilder
 							.methodOn(EmpresaControle.class)
-							.excluirEmpresa(objeto))
+							.excluirEmpresa(id))
 					.withSelfRel();
 			Link linkProprioAtualizar = WebMvcLinkBuilder
 					.linkTo(WebMvcLinkBuilder
@@ -74,7 +74,7 @@ public class AdicionadorLinkEmpresa implements AdicionadorLink<Empresa>{
 		Link linkProprioExcluir = WebMvcLinkBuilder
 				.linkTo(WebMvcLinkBuilder
 						.methodOn(EmpresaControle.class)
-						.excluirEmpresa(objeto))
+						.excluirEmpresa(objeto.getId()))
 				.withRel("excluir");
 		objeto.add(linkProprioEmpresa);
 		objeto.add(linkProprioEmpresas);

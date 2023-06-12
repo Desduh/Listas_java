@@ -33,7 +33,7 @@ public class VendaControle {
 	@Autowired
 	private AdicionadorLinkVenda adicionadorLink;
 
-	@GetMapping("/empresa/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Venda> obterVenda(@PathVariable long id) {
 		List<Venda> vendas = repositorio.findAll();
 		Venda venda = Selecionador.vendaSelecionador(vendas, id);
@@ -47,7 +47,7 @@ public class VendaControle {
 		}
 	}
 
-	@GetMapping("/vendas")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Venda>> obterVendas() {
 		List<Venda> vendas = repositorio.findAll();
 		if (vendas.isEmpty()) {
@@ -60,7 +60,7 @@ public class VendaControle {
 		}
 	}
 
-	@PostMapping("/cadastro")
+	@PostMapping("/cadastro/{id}")
 	public ResponseEntity<?> cadastrarVenda(@RequestBody Venda venda, @PathVariable long id) {
 		HttpStatus status = HttpStatus.CONFLICT;
 		if (venda.getId() == null) {
@@ -89,7 +89,7 @@ public class VendaControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> excluirVenda(@RequestBody Venda exclusao, @PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Venda venda = repositorio.getById(exclusao.getId());

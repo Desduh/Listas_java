@@ -32,7 +32,7 @@ public class EnderecoControle {
 	@Autowired
 	private AdicionadorLinkEndereco adicionadorLink;
 
-	@GetMapping("/endereco/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Endereco> obterEndereco(@PathVariable long id) {
 		List<Endereco> enderecos = repositorio.findAll();
 		Endereco endereco = Selecionador.enderecoSelecionador(enderecos, id);
@@ -46,7 +46,7 @@ public class EnderecoControle {
 		}
 	}
 
-	@GetMapping("/enderecos")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Endereco>> obterEnderecos() {
 		List<Endereco> enderecos = repositorio.findAll();
 		if (enderecos.isEmpty()) {

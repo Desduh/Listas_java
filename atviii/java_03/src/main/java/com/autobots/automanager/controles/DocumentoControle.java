@@ -33,7 +33,7 @@ public class DocumentoControle {
 	@Autowired
 	private AdicionadorLinkDocumento adicionadorLink;
 
-	@GetMapping("/documento/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Documento> obterDocumento(@PathVariable long id) {
 		List<Documento> documentos = repositorio.findAll();
 		Documento documento = Selecionador.documentoSelecionador(documentos, id);
@@ -47,7 +47,7 @@ public class DocumentoControle {
 		}
 	}
 
-	@GetMapping("/documentos")
+	@GetMapping("/visualizar")
 	public ResponseEntity<List<Documento>> obterDocumentos() {
 		List<Documento> documentos = repositorio.findAll();
 		if (documentos.isEmpty()) {
@@ -89,7 +89,7 @@ public class DocumentoControle {
 		return new ResponseEntity<>(status);
 	}
 
-	@DeleteMapping("/excluir")
+	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> excluirDocumento(@RequestBody Documento exclusao, @PathVariable long id) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Documento documento = repositorio.getById(exclusao.getId());
