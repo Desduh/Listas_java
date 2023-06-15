@@ -1,0 +1,204 @@
+.container {
+    width: 30vw;
+}
+
+.forms label {
+    margin-bottom: 0.5em;
+    font-size: 1.4em;
+}
+
+#stepTitle {
+    text-align: center;
+}
+
+.forms input, .forms select {
+    margin-bottom: 1em;
+    padding: 0.7em;
+    border: none;
+    border-radius: 5px;
+    max-width: 400px;
+    border: 1px solid #8b8da5;
+    background-color: #fff;
+}
+
+::-webkit-input-placeholder {
+    color:black;
+ }
+
+.forms input:hover, .forms select:hover {
+    box-shadow: 1px 1px 3px #797ca1;
+}
+
+.buttons, .submit {
+    margin-top: 10px;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    background-color: #8b8da5;
+    color: #fff;
+    font-size: 1.3em;
+}
+
+.submit{
+    max-width: 200px;
+    margin-bottom: 1em;
+}
+
+.plus{
+    text-align: end;
+}
+
+.del{
+    height: 35px;
+    width: 400px;
+    border: 0;
+    border-radius: 7px;
+    background-color: #d63439;
+    color: #fff;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.BackNext{
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+    gap: 1em;
+}
+
+.BackNext button{
+    width: 150px;
+}
+
+p{
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.table-cadastro td {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.table-cadastro tr {
+    background-color: transparent;
+    border: 1px solid #EFEFEF;
+}
+
+.cadastrar {
+    background-color: #797ca1;
+    padding: 15px 0;
+    border-radius: 7px;
+    color: #fff;
+    margin: 5px 0;
+}
+
+table{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 60vw;
+    table-layout: fixed;
+    margin-bottom: 15px;
+}
+
+table caption{
+    font-size: 1.5em;
+    margin: 5em 0 0.75em;
+}
+
+table tr{
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th, table td{
+    padding: 0.62em;
+    text-align: center;
+}
+
+table th{
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+table td .action{
+    border: 0;
+    padding: 5px;
+    margin-right: 2px;
+    align-items: center;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+table td .action svg{
+    vertical-align: middle;
+}
+
+table td .badge{
+    padding: 3px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.selected{
+    max-width: 200px;
+}
+
+.vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media screen and (max-width: 600px) {
+    table{
+        border: 0;
+    }
+
+    table caption{
+        font-size: 1.3em;
+    }
+
+    table thead{
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr{
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: 0.65em;
+    }
+
+    table td{
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: 0.8em;
+        text-align: right;
+    }
+
+    table td::before{
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child{
+        border-bottom: 0;
+    }
+}

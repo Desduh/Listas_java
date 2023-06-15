@@ -1,0 +1,93 @@
+.sidebar{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #8b8da5;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar div{
+    background-color: #8b8da5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sidebar div{
+    padding-top: 30px;
+}
+
+.sidebar div img{
+    display: block;
+    margin: auto;
+    width: 150px;
+    -webkit-filter: drop-shadow(2px 2px 6px rgba(255, 255, 255, 0.493));
+    filter: drop-shadow(2px 2px 6px rgba(255, 255, 255, 0.493));
+    object-fit: cover;
+    padding-bottom: 20%;
+}
+
+.sidebar a{
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: ease-in-out .3s;
+    margin-left: 1em;
+}
+
+.sidebar a svg{
+    margin-right: 0.6em;
+}
+
+.sidebar a:hover{
+    background-color: #8b8da5;
+    color: #fff;
+}
+
+.content{
+    margin-left: 200px;
+    padding: 1px 16px;
+}
+
+@media screen and (max-width: 700px){
+    div.content{
+        margin-left: 0;
+    }
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .sidebar a{
+        float: left
+    }
+
+    .sidebar div {
+        padding: 10px 0;
+    }
+
+    .sidebar div img {
+        width: 50px;
+        padding-bottom: 0;
+        margin-right: 50px;
+    }
+
+    .sidebar a svg{
+        display: none;
+    }
+
+    .content {
+        padding: 1px 55px;
+    }
+}
