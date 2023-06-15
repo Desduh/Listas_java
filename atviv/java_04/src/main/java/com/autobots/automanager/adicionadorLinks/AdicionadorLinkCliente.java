@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo;
+package com.autobots.automanager.adicionadorLinks;
 
 import com.autobots.automanager.controles.ClienteControle;
 import org.springframework.hateoas.Link;

@@ -2,10 +2,8 @@ package com.autobots.automanager.entidades;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 
-@EqualsAndHashCode
 @Data
 @Entity
 public class Servico extends RepresentationModel<Servico> {

@@ -1,7 +1,7 @@
 package com.autobots.automanager.controles;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkEndereco;
 import com.autobots.automanager.entidades.Endereco;
-import com.autobots.automanager.modelo.AdicionadorLinkEndereco;
 import com.autobots.automanager.modelo.EnderecoAtualizador;
 import com.autobots.automanager.modelo.EnderecoSelecionador;
 import com.autobots.automanager.repositorios.EnderecoRepositorio;
@@ -63,7 +63,8 @@ public class EnderecoControle{
     }
 
 
-    @PutMapping("/endereco")
+    @SuppressWarnings("deprecation")
+	@PutMapping("/endereco")
     public ResponseEntity<?> atualizarEndereco(@RequestBody Endereco atualizacao) {
         HttpStatus status = HttpStatus.CONFLICT;
         Endereco endereco = repositorio.getById(atualizacao.getId());
@@ -79,7 +80,8 @@ public class EnderecoControle{
 
     }
 
-    @DeleteMapping("/excluir")
+    @SuppressWarnings("deprecation")
+	@DeleteMapping("/excluir")
     public ResponseEntity<?> excluirEndereco(@RequestBody Endereco exclusao) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Endereco endereco = repositorio.getById(exclusao.getId());

@@ -3,8 +3,8 @@ package com.autobots.automanager.controles;
 import java.util.Date;
 import java.util.List;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkEmpresa;
 import com.autobots.automanager.entidades.Empresa;
-import com.autobots.automanager.modelo.AdicionadorLinkEmpresa;
 import com.autobots.automanager.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

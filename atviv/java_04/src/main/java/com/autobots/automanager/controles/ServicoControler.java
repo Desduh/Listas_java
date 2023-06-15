@@ -1,9 +1,9 @@
 package com.autobots.automanager.controles;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkServico;
 import com.autobots.automanager.entidades.Empresa;
 import com.autobots.automanager.entidades.Servico;
 import com.autobots.automanager.entidades.Venda;
-import com.autobots.automanager.modelo.AdicionadorLinkServico;
 import com.autobots.automanager.service.EmpresaService;
 import com.autobots.automanager.service.ServicoService;
 import com.autobots.automanager.service.VendaService;

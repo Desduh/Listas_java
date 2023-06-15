@@ -1,7 +1,6 @@
 package com.autobots.automanager.modelo;
 
 import com.autobots.automanager.entidades.Endereco;
-import com.autobots.automanager.entidades.Telefone;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

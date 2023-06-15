@@ -1,8 +1,6 @@
-package com.autobots.automanager.modelo;
+package com.autobots.automanager.adicionadorLinks;
 
-import com.autobots.automanager.controles.ClienteControle;
 import com.autobots.automanager.controles.EnderecoControle;
-import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Endereco;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;

@@ -1,7 +1,7 @@
 package com.autobots.automanager.controles;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkDocumento;
 import com.autobots.automanager.entidades.Documento;
-import com.autobots.automanager.modelo.AdicionadorLinkDocumento;
 import com.autobots.automanager.modelo.DocumentoAtualizador;
 import com.autobots.automanager.modelo.DocumentoSelecionador;
 import com.autobots.automanager.repositorios.DocumentoRepositorio;
@@ -62,7 +62,8 @@ public class DocumentoControle {
     }
 
 
-    @PutMapping("/atualizar")
+    @SuppressWarnings("deprecation")
+	@PutMapping("/atualizar")
     public ResponseEntity<?> atualizarDocumento(@RequestBody Documento atualizacao) {
         HttpStatus status = HttpStatus.CONFLICT;
         Documento documento = repositorio.getById(atualizacao.getId());
@@ -77,7 +78,8 @@ public class DocumentoControle {
         return new ResponseEntity<>(status);
     }
 
-    @DeleteMapping("/excluir")
+    @SuppressWarnings("deprecation")
+	@DeleteMapping("/excluir")
     public ResponseEntity<?> excluirDocumento(@RequestBody Documento exclusao) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Documento documento = repositorio.getById(exclusao.getId());

@@ -1,7 +1,7 @@
 package com.autobots.automanager.controles;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkTelefone;
 import com.autobots.automanager.entidades.Telefone;
-import com.autobots.automanager.modelo.AdicionadorLinkTelefone;
 import com.autobots.automanager.modelo.TelefoneAtualizador;
 import com.autobots.automanager.modelo.TelefoneSelecionador;
 import com.autobots.automanager.repositorios.TelefoneRepositorio;
@@ -63,7 +63,8 @@ public class TelefoneControle {
     }
 
 
-    @PutMapping("/atualizar")
+    @SuppressWarnings("deprecation")
+	@PutMapping("/atualizar")
     public ResponseEntity<?> atualizarTelefone(@RequestBody Telefone atualizacao) {
         HttpStatus status = HttpStatus.CONFLICT;
         Telefone telefone = repositorio.getById(atualizacao.getId());
@@ -78,7 +79,8 @@ public class TelefoneControle {
         return new ResponseEntity<>(status);
     }
 
-    @DeleteMapping("/excluir")
+    @SuppressWarnings("deprecation")
+	@DeleteMapping("/excluir")
     public ResponseEntity<?> excluirTelefone(@RequestBody Telefone exclusao) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Telefone telefone = repositorio.getById(exclusao.getId());

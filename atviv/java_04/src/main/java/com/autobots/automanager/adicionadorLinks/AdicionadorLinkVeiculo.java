@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo;
+package com.autobots.automanager.adicionadorLinks;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import com.autobots.automanager.entidades.Veiculo;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
-
 import com.autobots.automanager.controles.VeiculoControler;
 
 

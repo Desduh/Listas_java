@@ -2,7 +2,6 @@ package com.autobots.automanager.controles;
 
 import java.util.List;
 
-import com.autobots.automanager.modelo.AdicionadorLinkCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.autobots.automanager.adicionadorLinks.AdicionadorLinkCliente;
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.modelo.ClienteAtualizador;
 import com.autobots.automanager.modelo.ClienteSelecionador;
@@ -68,6 +68,7 @@ public class ClienteControle {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@PutMapping("/cliente/atualizar")
 	public ResponseEntity<?> atualizarCliente(@RequestBody Cliente atualizacao) {
 		HttpStatus status = HttpStatus.CONFLICT;
@@ -83,6 +84,7 @@ public class ClienteControle {
 		return new ResponseEntity<>(status);
 	}
 
+	@SuppressWarnings("deprecation")
 	@DeleteMapping("/cliente/excluir")
 	public ResponseEntity<?> excluirCliente(@RequestBody Cliente exclusao) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;

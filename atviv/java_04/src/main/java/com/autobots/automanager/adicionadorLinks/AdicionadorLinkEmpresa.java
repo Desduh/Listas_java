@@ -1,13 +1,11 @@
-package com.autobots.automanager.modelo;
+package com.autobots.automanager.adicionadorLinks;
 
 import com.autobots.automanager.entidades.Empresa;
-import com.autobots.automanager.modelo.AdicionadorLink;
+
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-
 import com.autobots.automanager.controles.EmpresaControle;
 
 
