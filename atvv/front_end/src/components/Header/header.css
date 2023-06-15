@@ -2,14 +2,18 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #8b8da5;
+    background-color: #05003d;
     position: fixed;
     height: 100%;
     overflow: auto;
+    display: flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .sidebar div{
-    background-color: #8b8da5;
+    background-color: #05003d;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

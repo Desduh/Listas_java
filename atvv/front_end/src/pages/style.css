@@ -17,7 +17,7 @@
     border: none;
     border-radius: 5px;
     max-width: 400px;
-    border: 1px solid #8b8da5;
+    border: 1px solid #211e44;
     background-color: #fff;
 }
 
@@ -26,7 +26,7 @@
  }
 
 .forms input:hover, .forms select:hover {
-    box-shadow: 1px 1px 3px #797ca1;
+    box-shadow: 1px 1px 3px #211e44;
 }
 
 .buttons, .submit {
@@ -34,7 +34,7 @@
     height: 35px;
     border: 0;
     border-radius: 7px;
-    background-color: #8b8da5;
+    background-color: #211e44;
     color: #fff;
     font-size: 1.3em;
 }
@@ -90,7 +90,7 @@ p{
 }
 
 .cadastrar {
-    background-color: #797ca1;
+    background-color: #211e44;
     padding: 15px 0;
     border-radius: 7px;
     color: #fff;

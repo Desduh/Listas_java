@@ -19,10 +19,6 @@ function SignIn() {
   return (
     <div className="container-center">
       <div className="login">
-        
-        <div className="login-area">
-          <img src={logo} alt="Autobot logo" />
-        </div>
 
         <form onSubmit={handleSubmit}>
           <h1>Entrar</h1>

@@ -81,7 +81,71 @@ export default function TodosClientes(){
             {/* {ocorrencia.map((item, index)=>{ 
               return(*/}
                 <tr>
-                  <td data-label="Cliente cadastrado">Amanda Caires Pereira</td>
+                  <td data-label="Cliente cadastrado">Carlos </td>
+                  <td data-label="Ações">
+                    <button className="action" style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal() }>
+                        <FiSearch color="#fff" size={17}/>
+                    </button>
+
+                    <Link className="action" style={{backgroundColor: '#F6a935'}} to={`/clientes`}>
+                      <FiEdit3 color="#fff" size={17}/>
+                    </Link>
+
+                    <button className="action" style={{backgroundColor: '#f00'}} onClick={ () => excluirCliente() }>
+                        <FiX color="#fff" size={17}/>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Cliente cadastrado">Lucas</td>
+                  <td data-label="Ações">
+                    <button className="action" style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal() }>
+                        <FiSearch color="#fff" size={17}/>
+                    </button>
+
+                    <Link className="action" style={{backgroundColor: '#F6a935'}} to={`/clientes`}>
+                      <FiEdit3 color="#fff" size={17}/>
+                    </Link>
+
+                    <button className="action" style={{backgroundColor: '#f00'}} onClick={ () => excluirCliente() }>
+                        <FiX color="#fff" size={17}/>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Cliente cadastrado">Amanda</td>
+                  <td data-label="Ações">
+                    <button className="action" style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal() }>
+                        <FiSearch color="#fff" size={17}/>
+                    </button>
+
+                    <Link className="action" style={{backgroundColor: '#F6a935'}} to={`/clientes`}>
+                      <FiEdit3 color="#fff" size={17}/>
+                    </Link>
+
+                    <button className="action" style={{backgroundColor: '#f00'}} onClick={ () => excluirCliente() }>
+                        <FiX color="#fff" size={17}/>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Cliente cadastrado">Júlia</td>
+                  <td data-label="Ações">
+                    <button className="action" style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal() }>
+                        <FiSearch color="#fff" size={17}/>
+                    </button>
+
+                    <Link className="action" style={{backgroundColor: '#F6a935'}} to={`/clientes`}>
+                      <FiEdit3 color="#fff" size={17}/>
+                    </Link>
+
+                    <button className="action" style={{backgroundColor: '#f00'}} onClick={ () => excluirCliente() }>
+                        <FiX color="#fff" size={17}/>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Cliente cadastrado">Bety</td>
                   <td data-label="Ações">
                     <button className="action" style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal() }>
                         <FiSearch color="#fff" size={17}/>
